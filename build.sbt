@@ -1,35 +1,14 @@
 name := "vizsql"
 
-scalaVersion in ThisBuild := "2.11.8"
+scalaVersion in ThisBuild := "2.12.4"
 
-lazy val root = project.in(file("."))
-  .enablePlugins(ScalaJSPlugin)
-  .aggregate(vizsqlJS, vizsqlJVM)
-  .settings()
-
-lazy val vizsql = crossProject.in(file("."))
-  .settings(
-    libraryDependencies += "org.scalactic" %%% "scalactic" % "3.0.0",
-    libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.0" % "test"
-  )
-  .jvmSettings(
-    organization := "com.criteo",
-    version := "1.0.0",
-    libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4",
-    credentials += Credentials(
-      "Sonatype Nexus Repository Manager",
-      "oss.sonatype.org",
-      "criteo-oss",
-      sys.env.getOrElse("SONATYPE_PASSWORD", "")
-    )
-  )
-  .jsSettings(
-    libraryDependencies += "org.scala-js" %%% "scala-parser-combinators" % "1.0.2",
-    scalaJSModuleKind := ModuleKind.CommonJSModule
-  )
-
-lazy val vizsqlJVM = vizsql.jvm
-lazy val vizsqlJS = vizsql.js
+libraryDependencies ++= Seq(
+  "org.scalactic" %% "scalactic" % "3.2.0-SNAP10",
+  "org.scalatest" %% "scalatest" % "3.2.0-SNAP10" % Test,
+  "org.scalacheck" %% "scalacheck" % "1.14.0" % Test,
+  "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4")
+organization := "com.criteo"
+version := "1.0.0"
 
 // To sync with Maven central, you need to supply the following information:
 pomExtra in Global := {
@@ -55,8 +34,3 @@ pomExtra in Global := {
       </developer>
     </developers>
 }
-
-pgpPassphrase := sys.env.get("SONATYPE_PASSWORD").map(_.toArray)
-pgpSecretRing := file(".travis/secring.gpg")
-pgpPublicRing := file(".travis/pubring.gpg")
-usePgpKeyHex("755d525885532e9e")

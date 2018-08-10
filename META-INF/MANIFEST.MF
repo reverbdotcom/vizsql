@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: vizsql
+Implementation-Version: 1.0.0
+Specification-Vendor: com.criteo
+Specification-Title: vizsql
+Implementation-Vendor-Id: com.criteo
+Specification-Version: 1.0.0
+Implementation-Vendor: com.criteo
+
