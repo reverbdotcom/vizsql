@@ -29,8 +29,10 @@ object SQL99Parser {
     "=", "{", "}",
     "^", "??(", "??)",
     "<>", ">=", "<=",
-    "||", "->", "=>"
+    "||", "->", "=>",
+    "::"
   )
+
   val comparisonOperators = Set("=", "<>", "<", ">", ">=", "<=")
 
   val likeOperators = Set("like")
